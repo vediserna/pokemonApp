@@ -20,3 +20,6 @@ build/
 *.iml
 .gradle/
 /out/
+
+# misc
+backend-logs.txt

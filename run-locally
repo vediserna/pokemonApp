@@ -1,0 +1,27 @@
+echo "Building backend"
+
+for dir in "./pokemonApp" "./pokemon-app"
+do
+    if ! [ -d "$dir" ]
+    then
+        echo "Not in root dir. Could not build"
+        exit 1
+    fi
+done
+cd ./pokemonApp
+
+echo "Building backend app"
+./gradlew build
+
+echo "Starting backend app. Output will be piped in to backend-logs.txt"
+java -jar ./build/libs/pokemonApp-0.0.1-SNAPSHOT.jar > ../backend-logs.txt 2>&1 &
+sleep 10
+
+cd ..
+
+echo "Building frontend"
+cd ./pokemon-app
+echo "Installing dependencies..."
+npm i
+
+npm start
